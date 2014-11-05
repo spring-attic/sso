@@ -18,15 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableOAuth2Sso
 public class Application {
 
+	@RequestMapping("/")
+	public String home() {
+		return "<html><body><a href='dashboard'>dashboard</a><br/><a href='dashboard/login'>login</a></body></html>";
+	}
+
 	@RequestMapping("/dashboard")
 	public String dashboard() {
-		return "<html><body>Dashboard!</body></html>";
+		return "<html><body>Dashboard Yay!</body></html>";
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Component
 	public static class LoginConfigurer extends OAuth2SsoConfigurerAdapter {
 		@Override

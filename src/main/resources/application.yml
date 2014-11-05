@@ -3,6 +3,7 @@ server:
 security:
   user:
     password: user
+  ignored: /
 oauth2:
   sso:
     loginPath: /dashboard/login

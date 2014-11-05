@@ -1,0 +1,20 @@
+server:
+  port: 9999
+security:
+  user:
+    password: user
+oauth2:
+  sso:
+    loginPath: /dashboard/login
+  client:
+    tokenUri: http://localhost:8080/uaa/oauth/token
+    authorizationUri: http://localhost:8080/uaa/oauth/authorize
+    clientId: acme
+    clientSecret: acmesecret
+  resource:
+    tokenInfoUri: http://localhost:8080/uaa/oauth/check_token
+    id: openid
+    serviceId: ${PREFIX:}resource
+logging:
+  level:
+    org.springframework.security: DEBUG

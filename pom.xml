@@ -13,7 +13,7 @@
 
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starters</artifactId>
+		<artifactId>spring-cloud-starter-parent</artifactId>
 		<version>1.0.0.M2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @RestController
 @EnableOAuth2Sso
-public class Application {
+public class SsoApplication {
 
 	@RequestMapping("/")
 	public String home() {
@@ -29,7 +29,7 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(SsoApplication.class, args);
 	}
 
 	@Component

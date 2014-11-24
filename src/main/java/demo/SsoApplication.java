@@ -20,7 +20,7 @@ public class SsoApplication {
 
 	@RequestMapping("/")
 	public String home() {
-		return "<html><body><a href='dashboard'>dashboard</a><br/><a href='dashboard/login'>login</a></body></html>";
+		return "<html><body><a href='dashboard/'>dashboard</a><br/><a href='login'>login</a></body></html>";
 	}
 
 	@RequestMapping("/dashboard")
@@ -35,9 +35,13 @@ public class SsoApplication {
 	@Component
 	public static class LoginConfigurer extends OAuth2SsoConfigurerAdapter {
 		@Override
+		public void match(RequestMatchers matchers) {
+			matchers.antMatchers("/dashboard/**");
+		}
+
+		@Override
 		public void configure(HttpSecurity http) throws Exception {
-			http.antMatcher("/dashboard/**").authorizeRequests().anyRequest()
-					.authenticated();
+			http.authorizeRequests().anyRequest().authenticated();
 		}
 	}
 }

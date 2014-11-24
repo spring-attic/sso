@@ -6,8 +6,6 @@ security:
     password: user
   ignored: /,/favicon.ico
 oauth2:
-  sso:
-    loginPath: /dashboard/login
   client:
     tokenUri: http://localhost:8080/uaa/oauth/token
     authorizationUri: http://localhost:8080/uaa/oauth/authorize

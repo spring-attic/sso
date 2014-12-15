@@ -1,10 +1,16 @@
-debug:
 server:
   port: 9999
 security:
   user:
     password: user
-  ignored: /,/favicon.ico
+  ignored: /,/favicon.ico,/foo/**
+zuul:
+  routes:
+    foo:
+      url: http://localhost:8080/uaa
+auth:
+  routes:
+    foo: oauth2  
 oauth2:
   client:
     tokenUri: http://localhost:8080/uaa/oauth/token
@@ -19,3 +25,4 @@ oauth2:
 logging:
   level:
     org.springframework.security: DEBUG
+    com.netflix.discovery: 'OFF'

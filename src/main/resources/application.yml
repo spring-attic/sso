@@ -5,13 +5,6 @@ security:
     password: user
   ignored: /,/favicon.ico,/**/*.html,/js/**,/css/**,/webjars/**
   sessions: ALWAYS
-zuul:
-  routes:
-    foo:
-      url: http://localhost:8080/uaa
-auth:
-  routes:
-    foo: oauth2  
 oauth2:
   sso:
     loginPath: /dashboard/login

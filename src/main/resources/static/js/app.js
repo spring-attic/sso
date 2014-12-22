@@ -10,7 +10,10 @@ angular.module('sso', [ 'ngRoute', 'ngResource', 'ngCookies' ]).config(
 				controller : 'dashboard'
 			});
 
-		}).controller('navigation', function($scope, $http, $window) {
+		}).controller('navigation', function($scope, $http, $window, $route) {
+	$scope.tab = function(route) {
+		return $route.current && route === $route.current.controller;
+	}
 	if (!$scope.user) {
 		$http.get('/dashboard/user').success(function(data) {
 			$scope.user = data;

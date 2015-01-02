@@ -1,4 +1,4 @@
-angular.module('sso', [ 'ngRoute', 'ngResource', 'ngCookies' ]).config(
+angular.module('sso', [ 'ngRoute', 'ngResource' ]).config(
 		function($routeProvider) {
 
 			$routeProvider.otherwise('/');
@@ -13,7 +13,7 @@ angular.module('sso', [ 'ngRoute', 'ngResource', 'ngCookies' ]).config(
 		}).controller('navigation', function($scope, $http, $window, $route) {
 	$scope.tab = function(route) {
 		return $route.current && route === $route.current.controller;
-	}
+	};
 	if (!$scope.user) {
 		$http.get('/dashboard/user').success(function(data) {
 			$scope.user = data;

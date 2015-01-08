@@ -10,8 +10,8 @@ oauth2:
     loginPath: /dashboard/login
     logoutPath: /dashboard/logout
   client:
-    tokenUri: http://localhost:8080/uaa/oauth/token
-    authorizationUri: http://localhost:8080/uaa/oauth/authorize
+    accessTokenUri: http://localhost:8080/uaa/oauth/token
+    userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
     clientId: acme
     clientSecret: acmesecret
   resource:

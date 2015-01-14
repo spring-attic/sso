@@ -5,20 +5,24 @@ security:
     password: user
   ignored: /,/favicon.ico,/**/*.html,/js/**,/css/**,/webjars/**
   sessions: ALWAYS
-oauth2:
-  sso:
-    loginPath: /dashboard/login
-    logoutPath: /dashboard/logout
-  client:
-    accessTokenUri: http://localhost:8080/uaa/oauth/token
-    userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
-    clientId: acme
-    clientSecret: acmesecret
-  resource:
-    jwt:
-      keyUri: http://localhost:8080/uaa/oauth/token_key
-    id: openid
-    serviceId: ${PREFIX:}resource
+management:
+  security:
+    role: HERO
+spring:
+  oauth2:
+    sso:
+      loginPath: /dashboard/login
+      logoutPath: /dashboard/logout
+    client:
+      accessTokenUri: http://localhost:8080/uaa/oauth/token
+      userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      jwt:
+        keyUri: http://localhost:8080/uaa/oauth/token_key
+      id: openid
+      serviceId: ${PREFIX:}resource
 logging:
   level:
     org.springframework.security: DEBUG

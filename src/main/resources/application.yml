@@ -5,7 +5,7 @@ server:
 security:
   user:
     password: user
-  ignored: /,/favicon.ico,/**/*.html,/js/**,/css/**,/webjars/**
+  ignored: /,/favicon.ico,/index.html,/home.html,/dashboard.html,/js/**,/css/**,/webjars/**
   sessions: ALWAYS
 management:
   security:

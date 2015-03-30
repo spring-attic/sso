@@ -18,6 +18,7 @@ import org.springframework.cloud.security.oauth2.sso.EnableOAuth2Sso;
 import org.springframework.cloud.security.oauth2.sso.OAuth2SsoConfigurerAdapter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -48,6 +49,10 @@ public class SsoApplication {
 	}
 
 	public static void main(String[] args) {
+		StandardEnvironment environment = new StandardEnvironment();
+		if (!environment.acceptsProfiles("cloud", "github")) {
+			environment.addActiveProfile("local");
+		}
 		SpringApplication.run(SsoApplication.class, args);
 	}
 	

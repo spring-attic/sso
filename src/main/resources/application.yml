@@ -21,6 +21,11 @@ spring:
     sso:
       loginPath: /dashboard/login
       logoutPath: /dashboard/logout
+
+---
+spring:
+  profiles: local
+  oauth2:
     client:
       accessTokenUri: http://localhost:8080/uaa/oauth/token
       userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
@@ -34,11 +39,6 @@ spring:
           -----END PUBLIC KEY-----
       id: openid
       serviceId: ${PREFIX:}resource
-
----
-spring:
-  profiles: local
-  oauth2:
 
 ---
 spring:

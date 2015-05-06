@@ -24,7 +24,7 @@ spring:
 
 ---
 spring:
-  profiles: local
+  profiles: default
   oauth2:
     client:
       accessTokenUri: http://localhost:8080/uaa/oauth/token

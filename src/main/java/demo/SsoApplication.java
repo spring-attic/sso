@@ -50,9 +50,6 @@ public class SsoApplication {
 
 	public static void main(String[] args) {
 		StandardEnvironment environment = new StandardEnvironment();
-		if (!environment.acceptsProfiles("cloud", "github")) {
-			environment.addActiveProfile("local");
-		}
 		SpringApplication.run(SsoApplication.class, args);
 	}
 	

@@ -20,7 +20,6 @@ spring:
   oauth2:
     sso:
       loginPath: /dashboard/login
-      logoutPath: /dashboard/logout
 
 ---
 spring:

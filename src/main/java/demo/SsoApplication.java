@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.cloud.security.oauth2.sso.EnableOAuth2Sso;
-import org.springframework.cloud.security.oauth2.sso.OAuth2SsoConfigurerAdapter;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.StandardEnvironment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
@@ -35,7 +34,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @EnableAutoConfiguration
 @RestController
 @RequestMapping("/dashboard")
-@EnableOAuth2Sso
 public class SsoApplication {
 
 	@RequestMapping("/message")
@@ -49,34 +47,31 @@ public class SsoApplication {
 	}
 
 	public static void main(String[] args) {
-		StandardEnvironment environment = new StandardEnvironment();
 		SpringApplication.run(SsoApplication.class, args);
 	}
-	
+
 	@Controller
 	public static class LoginErrors {
-		
+
 		@RequestMapping("/dashboard/login")
 		public String dashboard() {
 			return "redirect:/#/";
 		}
-		
+
 	}
 
 	@Component
-	public static class LoginConfigurer extends OAuth2SsoConfigurerAdapter {
-
-		@Override
-		public void match(RequestMatchers matchers) {
-			matchers.antMatchers("/dashboard/**");
-		}
+	@EnableOAuth2Sso
+	public static class LoginConfigurer extends WebSecurityConfigurerAdapter {
 
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/dashboard/**").authorizeRequests().anyRequest()
 					.authenticated().and().csrf()
 					.csrfTokenRepository(csrfTokenRepository()).and()
-					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+					.logout().logoutUrl("/dashboard/logout").permitAll()
+					.logoutSuccessUrl("/");
 		}
 
 		private Filter csrfHeaderFilter() {
@@ -85,10 +80,11 @@ public class SsoApplication {
 				protected void doFilterInternal(HttpServletRequest request,
 						HttpServletResponse response, FilterChain filterChain)
 						throws ServletException, IOException {
-					CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
-							.getName());
+					CsrfToken csrf = (CsrfToken) request
+							.getAttribute(CsrfToken.class.getName());
 					if (csrf != null) {
-						Cookie cookie = new Cookie("XSRF-TOKEN", csrf.getToken());
+						Cookie cookie = new Cookie("XSRF-TOKEN",
+								csrf.getToken());
 						cookie.setPath("/");
 						response.addCookie(cookie);
 					}

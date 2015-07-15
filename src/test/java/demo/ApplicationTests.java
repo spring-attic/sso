@@ -18,13 +18,13 @@ import org.springframework.web.client.RestTemplate;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SsoApplication.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:0")
+@IntegrationTest({"debug", "server.port:0"})
 public class ApplicationTests {
 
 	@Value("${local.server.port}")
 	private int port;
 
-	@Value("${spring.oauth2.client.userAuthorizationUri}")
+	@Value("${security.oauth2.client.userAuthorizationUri}")
 	private String authorizeUri;
 
 	private RestTemplate template = new TestRestTemplate();
@@ -61,7 +61,7 @@ public class ApplicationTests {
 				+ port + "/dashboard/login", String.class);
 		assertEquals(HttpStatus.FOUND, response.getStatusCode());
 		String location = response.getHeaders().getFirst("Location");
-		assertTrue("Wrong location: " + location, location.startsWith(authorizeUri));
+		assertTrue("Wrong location: " + location + " not " + authorizeUri, location.startsWith(authorizeUri));
 	}
 
 }

@@ -7,6 +7,9 @@ security:
     password: user
   ignored: /,/favicon.ico,/index.html,/home.html,/dashboard.html,/js/**,/css/**,/webjars/**
   sessions: ALWAYS
+  oauth2:
+    sso:
+      loginPath: /dashboard/login
 management:
   security:
     role: HERO
@@ -16,14 +19,10 @@ logging:
     org.springframework.security: DEBUG
     com.netflix.discovery: 'OFF'
 
-spring:
-  oauth2:
-    sso:
-      loginPath: /dashboard/login
-
 ---
 spring:
   profiles: default
+security:
   oauth2:
     client:
       accessTokenUri: http://localhost:8080/uaa/oauth/token
@@ -42,6 +41,7 @@ spring:
 ---
 spring:
   profiles: github
+security:
   oauth2:
     client:
       clientId: 89630a412fa314777dc2

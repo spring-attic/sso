@@ -1,4 +1,4 @@
-debug:
+debug: true
 server:
   port: 9999
 
